@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>クラス・オブジェクト・オーバーロード・ゲッター・セッター</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <li><a href="index.html">記事一覧</a></li>
+    </header>
+    <main>
+        <h1>クラス・オブジェクト・オーバーロード・ゲッター・セッター</h1>
+        <h2>1. クラスとオブジェクトについて</h2>
+        <p>
+            Javaでは、全てがクラスという設計図に基づいて形作られる。
+            クラスは属性（変数）とメソッド（関数）を持つ。
+            これらのクラスから作られる実体がオブジェクトである。
+        </p>
+        
+        <p>
+            例えば、人間をクラスと考えると、名前や年齢がその属性となる。
+            そして、話すや歩くといった行動がそのメソッドとなるだろう。
+            以下に、クラスとオブジェクトのJavaコードを示す。
+        </p>
+
+        <pre><code class="language-java">
+            public class Human {
+                String name;  // 属性
+                int age;      // 属性
+              
+                void speak() {   // メソッド
+                  // 何かしらのコード
+                }
+              
+                void walk() {   // メソッド
+                  // 何かしらのコード
+                }
+            }
+              
+            public static void main(String[] args) {
+                Human hiroshi = new Human();  // オブジェクトの生成
+                hiroshi.name = "Hiroshi";     // 属性への値の代入
+                hiroshi.age = 20;             // 属性への値の代入
+            }              
+        </code></pre>
+        <h2>2. オーバーロードについて</h2>
+        <p>
+            オーバーロードとは、同じ名前のメソッドを異なる引数で複数定義することを指す。
+            オーバーロードにより、同じ名前のメソッドでも、引数によって処理を変えることが可能となる。
+            以下に、オーバーロードのJavaコードを示す。
+        </p>
+        <pre><code class="language-java">
+            public class OverloadExample {
+                void display(int num) {
+                  System.out.println("Displaying an integer: " + num);
+                }
+              
+                void display(String str) {
+                  System.out.println("Displaying a string: " + str);
+                }
+            }              
+        </code></pre>
+
+        <h2>3. ゲッターとセッターについて</h2>
+        <p>
+            ゲッターとセッターは、クラスの属性へのアクセスを管理するためのメソッドである。
+            ゲッター（getメソッド）は属性の値を取得し、セッター（setメソッド）は属性の値を設定する。
+            以下に、ゲッターとセッターのJavaコードを示す。
+        </p>
+        <pre><code class="language-java">
+            public class Human {
+                private String name;
+                private int age;
+              
+                public String getName() {
+                  return name;
+                }
+              
+                public void setName(String name) {
+                  this.name = name;
+                }
+              
+                public int getAge() {
+                  return age;
+                }
+              
+                public void setAge(int age) {
+                  this.age = age;
+                }
+            }
+              
+        </code></pre>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-java.min.js"></script>
+</body>
+</html>
