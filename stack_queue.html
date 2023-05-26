@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>スタックとキュー、可変長配列と連結リスト、キャストとIteratorについて</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <li><a href="index.html">記事一覧</a></li>
+    </header>
+    <main>
+        <h1>スタックとキュー、可変長配列と連結リスト、キャストとIteratorについて</h1>
+        <h2>スタックとキュー</h2>
+        <p>
+            スタックとキューは、データの集合を操作する基本的なデータ構造である。<br>
+            どちらも一連のデータを保存し、それにアクセスするメカニズムを提供する。
+        </p>
+        
+        <p>
+            スタックは、Last-In-First-Out (LIFO) の原則に基づいている。<br>
+            つまり、最後に入れたデータが最初に出てくる。<br>
+            Javaにおけるスタックの使用例を以下に示す。<br>
+        </p>
+        <pre><code class="language-java">
+            import java.util.Stack;
+
+            Stack<Integer> stack = new Stack<>();
+            stack.push(1);
+            stack.push(2);
+            stack.push(3);
+
+            int topElement = stack.pop(); // topElement will be 3
+        </code></pre>
+
+        <p>
+            一方、キューは、First-In-First-Out (FIFO) の原則に基づいている。<br>
+            つまり、最初に入れたデータが最初に出てくる。<br>
+            Javaにおけるキューの使用例を以下に示す。<br>
+        </p>
+
+        <pre><code class="language-java">
+            import java.util.LinkedList;
+            import java.util.Queue;
+
+            Queue<Integer> queue = new LinkedList<>();
+            queue.add(1);
+            queue.add(2);
+            queue.add(3);
+
+            int firstElement = queue.remove(); // firstElement will be 1
+        </code></pre>
+
+        <p>
+            スタックとキューの主な時間計算量と空間計算量は、通常、O(1) である。<br>
+            ただし、内部的なリサイズ操作が発生した場合、これは最悪のケースで O(n) になることがある。<br>
+        </p>
+
+        <h2>可変長配列と連結リスト</h2>
+        <p>
+            可変長配列と連結リストもまた、データを保持するためのデータ構造である。<br>
+            どちらもデータの追加と削除を可能にするが、それぞれが最適な使用シーンは異なる。<br>
+        </p>
+
+        <p>
+            可変長配列は、動的にサイズを変更可能な配列である。<br>
+            JavaのArrayListは可変長配列の一例である。<br>
+        </p>
+
+        <pre><code class="language-java">
+            import java.util.ArrayList;
+
+            ArrayList<Integer> arrayList = new ArrayList<>();
+            arrayList.add(1);
+            arrayList.add(2);
+            arrayList.add(3);
+
+            int firstElement = arrayList.get(0); // firstElement will be 1
+        </code></pre>
+
+        <p>
+            一方、連結リストは、各データが次のデータへの参照を持つようなデータ構造である。<br>
+            JavaのLinkedListは連結リストの一例である。<br>
+        </p>
+
+        <pre><code class="language-java">
+            import java.util.LinkedList;
+
+            LinkedList<Integer> linkedList = new LinkedList<>();
+            linkedList.add(1);
+            linkedList.add(2);
+            linkedList.add(3);
+
+            int firstElement = linkedList.get(0); // firstElement will be 1
+
+        </code></pre>
+
+        <p>
+            可変長配列は、インデックスを使用して直接要素にアクセスできるため、アクセスは O(1) である。<br>
+            しかし、要素を挿入または削除すると、配列の再配置が必要な場合があり、これは O(n) となる。<br>
+        </p>
+
+        <p>
+            一方、連結リストは、要素の挿入と削除が O(1) であるが、<br>
+            特定の要素にアクセスするためにはリストを通過する必要があるため、アクセスは O(n) となる。<br>
+        </p>
+
+        <h2>キャスト</h2>
+        <p>
+            キャストは、ある型の変数を別の型に一時的に変換する手段である。<br>
+            Javaでは、キャストは次のように行う。<br>
+        </p>
+        
+        <pre><code class="language-java">
+            int integerNumber = 10;
+            double decimalNumber = (double) integerNumber; // decimalNumber will be 10.0
+        </code></pre>
+
+        <p>
+            この例では、整数値がダブル型の値にキャストされている。<br>
+            ただし、キャストは型間の互換性を前提としているため、常に可能とは限らない。<br>
+        </p>
+
+        <h2>イテレータ</h2>
+        <p>
+            イテレータは、データ構造を通して要素にアクセスするためのデザインパターンであり、<br>
+            具体的な実装によらず一貫した方法で集合の要素を操作するための方法を提供する。<br>
+            Javaでは、java.util.Iterator インターフェイスを通じてイテレータが提供され、<br>
+            コレクションフレームワークの中心的な要素となっている。<br>
+        </p>
+        <p>
+            イテレータは主に、次の要素が存在するかを確認する hasNext() メソッドと、<br>
+            次の要素を取得する next() メソッドで構成されている。<br>
+            これにより、forループやwhileループなどを使わずに、<br>
+            一貫した方法で集合を通過することが可能になる。<br>
+        </p>
+        <p>
+            以下は、Javaでのイテレータの使用例である。
+        </p>
+
+        <pre><code class = "language-java">
+            import java.util.ArrayList;
+            import java.util.Iterator;
+
+            ArrayList<Integer> arrayList = new ArrayList<>();
+            arrayList.add(1);
+            arrayList.add(2);
+            arrayList.add(3);
+
+            Iterator<Integer> iterator = arrayList.iterator();
+            while(iterator.hasNext()) {
+                Integer num = iterator.next();
+                System.out.println(num);
+            }
+        </code></pre>
+
+        <p>
+            このコードは、ArrayListの各要素を取り出し、それをコンソールに出力している。<br>
+            イテレータを使用することで、ArrayListの内部構造を意識せずに要素を取得することが可能である。<br>
+            このように、イテレータはデータ構造の詳細を隠蔽しつつ一貫した要素のアクセスを提供するため、<br>
+            異なるデータ構造に対するコードの再利用性を高める。
+        </p>
+
+        <p>
+            イテレータを用いたコレクションの探索には、時間計算量は O(n) となる。<br>
+            これは、コレクションの全ての要素を一度に訪れる必要があるからである。<br>
+            空間計算量については、追加のスペースをほとんど必要としないため、通常 O(1) である。<br>
+            ただし、これはコレクション自体のサイズを除外した場合の計算である。
+        </p>
+
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-java.min.js"></script>
+</body>
+</html>

@@ -13,15 +13,15 @@
         <h1>Union-Find 4つのアルゴリズム</h1>
         <h2>1. Quick-Find</h2>
         <p>
-            Quick-Findアルゴリズムは、名前が示すように、「Find」操作が非常に高速。
-            各要素は自身が所属する集合を示すIDを保持しており、同じ集合に所属する要素はすべて同じIDを持つ。
-            これにより、「Find」操作はO(1)の時間計算量で行うことができる。
+            Quick-Findアルゴリズムは、名前が示すように、「Find」操作が非常に高速。<br>
+            各要素は自身が所属する集合を示すIDを保持しており、同じ集合に所属する要素はすべて同じIDを持つ。<br>
+            これにより、「Find」操作はO(1)の時間計算量で行うことができる。<br>
         </p>
         
         <p>
-            ただし、「Union」操作は遅い。
-            というのも、2つの集合を併合する際には、一方の集合のすべての要素のIDを更新する必要があるから。
-            したがって、「Union」操作はO(n)の時間計算量を必要とする。
+            ただし、「Union」操作は遅い。<br>
+            というのも、2つの集合を併合する際には、一方の集合のすべての要素のIDを更新する必要があるから。<br>
+            したがって、「Union」操作はO(n)の時間計算量を必要とする。<br>
             空間計算量はO(n)。
         </p>
         
@@ -54,9 +54,9 @@
         </code></pre>
         <h2>2. Quick-Union</h2>
         <p>
-            Quick-Unionアルゴリズムは「Union」操作が高速。
-            「Find」操作はO(n)の時間計算量を必要とするが、「Union」操作は高々O(n)。
-            空間計算量はO(n)。
+            Quick-Unionアルゴリズムは「Union」操作が高速。<br>
+            「Find」操作はO(n)の時間計算量を必要とするが、「Union」操作は高々O(n)。<br>
+            空間計算量はO(n)。<br>
         </p>
 
         <h3>Quick_Union.java</h3>
@@ -92,10 +92,10 @@
 
         <h2>3. Weighted Quick-Union</h2>
         <p>
-            Weighted Quick-UnionアルゴリズムはQuick-Unionアルゴリズムを改良したもので、
-            「Union」操作がバランス良く行われるようになってる。
-            これにより、「Find」操作と「Union」操作は平均的にはO(log n)の時間計算量で行うことができる。
-            空間計算量はO(n)。
+            Weighted Quick-UnionアルゴリズムはQuick-Unionアルゴリズムを改良したもので、<br>
+            「Union」操作がバランス良く行われるようになってる。<br>
+            これにより、「Find」操作と「Union」操作は平均的にはO(log n)の時間計算量で行うことができる。<br>
+            空間計算量はO(n)。<br>
         </p>
         <h3>Weighted_Quick_Union.java</h3>
         <pre><code class="language-java">
@@ -140,10 +140,10 @@
 
         <h2>4. Path Compression</h2>
         <p>
-            Path Compressionは、「Find」操作をさらに高速化するためのテクニック。
-            具体的には、根へのパスを辿るときに、そのパス上のすべてのノードが直接根を指すようにすることで、
-            次回以降の「Find」操作の高速化を図る。
-            これにより、「Find」操作と「Union」操作のアムルト平均時間計算量はほぼO(1)となる。
+            Path Compressionは、「Find」操作をさらに高速化するためのテクニック。<br>
+            具体的には、根へのパスを辿るときに、そのパス上のすべてのノードが直接根を指すようにすることで、<br>
+            次回以降の「Find」操作の高速化を図る。<br>
+            これにより、「Find」操作と「Union」操作のアムルト平均時間計算量はほぼO(1)となる。<br>
             空間計算量はO(n)。
         </p>
         <p>
@@ -192,11 +192,11 @@
         </code></pre>
 
         <p>
-            以上が、Quick-Find、Quick-Union、Weighted Quick-Union、
-            およびPath Compressionについての説明とそのJavaによる実装例。
-            それぞれのアルゴリズムはその特性により、適用するべき状況が異なる。
-            ただし、Path Compressionを適用したWeighted Quick-Unionは最もバランスの良い性能を持つため、
-            一般的にはこれが推奨される。
+            以上が、Quick-Find、Quick-Union、Weighted Quick-Union、<br>
+            およびPath Compressionについての説明とそのJavaによる実装例。<br>
+            それぞれのアルゴリズムはその特性により、適用するべき状況が異なる。<br>
+            ただし、Path Compressionを適用したWeighted Quick-Unionは最もバランスの良い性能を持つため、<br>
+            一般的にはこれが推奨される。<br>
         </p>
 
     </main>
