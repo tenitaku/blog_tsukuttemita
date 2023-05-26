@@ -1,0 +1,7 @@
+Stack Queue
+可変長配列と連結リストの比較
+キャストとは
+Iteration
+ダイクストラの２つのスタックを使った数学の計算の実現
+
+, explain about this code with time and space complexity.

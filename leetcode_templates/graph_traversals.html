@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>binary_search</title>
+    <title>Graph Traversals</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
 </head>
@@ -11,8 +11,76 @@
         <li><a href="../leetcode_templates.html">templates</a></li>
     </header>
     <main>
-        <h1>binary_search</h1>
-        
+        <h1>Graph Traversals</h1>
+        <h2>DFS</h2>
+        <pre><code class = "language-java">
+            void dfs(Map<Integer, List<Integer>> graph, int cur, Set<Integer> visited) {
+                if (visited.contains(cur)) return;
+                visited.add(cur);
+                System.out.print(cur + " ");
+                for (int next : graph.get(cur)) {
+                    dfs(graph, next, visited);
+                }
+            }
+        </code></pre>
+
+        <p>Here's how it works:</p>
+
+        <ol>
+            <li>The graph is represented as an adjacency list using a map where keys represent nodes and values represent the list of adjacent nodes.</li>
+            <li>The method named "dfs" (short for depth-first search) performs the traversal. It takes in three arguments: the graph, the current node (from where the DFS will begin or is continuing), and a set of visited nodes.</li>
+            <li>The first line in the dfs method checks if the current node has been visited before. If it has, the method immediately returns to avoid infinite loops and unnecessary computation.</li>
+            <li>If the node has not been visited, it's added to the visited set and its value is printed.</li>
+            <li>The method then loops over all of the current node's neighbors. For each neighbor, it recursively calls the dfs method with the neighbor as the new current node.</li>
+            <li>The process continues until all nodes in the graph have been visited.</li>
+        </ol>
+
+        <p>In terms of time complexity:</p>
+        <ul><li>The worst-case scenario for DFS is when all the vertices and edges of the graph must be visited. As such, the time complexity is O(V + E), where V is the number of vertices (or nodes) in the graph and E is the number of edges. The "V" term is for visiting each vertex, and the "E" term is for visiting each edge that is connected to the vertices.</li></ul>
+        <p>In terms of space complexity:</p>
+        <ul><li>For space complexity, the DFS algorithm is O(V) because, in the worst-case scenario, all the vertices will be pushed onto the system's stack space (or in this case, added to the "visited" set) in memory. If the graph becomes a tree structure, the maximum height of the tree can be V, that is the total number of vertices. Hence, the space complexity is O(V).</li></ul>
+        <p>Please note that this analysis assumes that the graph is connected (there's a path from every node to every other node). If the graph isn't connected, additional logic might be necessary to ensure that all nodes are visited.</p>
+
+        <h2>BFS</h2>
+        <pre><code class = "language-java">
+            void bfs(Map<Integer, List<Integer>> graph, int node) {
+                Deque<Integer> q = new ArrayDeque<>();
+                Set<Integer> visited = new HashSet<>();
+                q.addLast(node);
+                visited.add(node);
+          
+                while (q.isEmpty() == false) {
+                    int cur = q.removeFirst();
+                    System.out.print(cur + " ");
+                    for (int next : graph.get(cur)) {
+                        if (visited.contains(next)) continue;
+                        q.addLast(next);
+                        visited.add(next);
+                    }
+                }
+            }
+        </code></pre>
+
+        <p>The graph is represented as an adjacency list using a map, and the method named "bfs" performs the traversal.</p>
+        <p>Here's how it works:</p>
+
+        <ol>
+            <li>The graph is again represented as an adjacency list using a map where keys represent nodes and values represent the list of adjacent nodes.</li>
+            <li>The "bfs" method starts by initializing a queue ("q") and a set of visited nodes ("visited"). The start node is added to both the queue and the visited set.</li>
+            <li>Then, as long as the queue is not empty, it keeps removing the node at the front of the queue and printing it. For each removed node, the method checks all of its neighbors. If a neighbor has not been visited before, it's added to the queue and the visited set.</li>
+            <li>The process continues until all reachable nodes from the start node have been visited and the queue is empty.</li>
+        </ol>
+
+        <p>The time complexity and space complexity of BFS are similar to those of DFS:</p>
+
+        <ul>
+            <li>The time complexity is O(V + E), where V is the number of vertices (or nodes) in the graph and E is the number of edges. The "V" term is for visiting each vertex, and the "E" term is for visiting each edge that is connected to the vertices. This is because every vertex and every edge will be checked during the traversal.</li>
+            <li>The space complexity is also O(V), where V is the number of vertices (or nodes) in the graph. In the worst-case scenario, the queue can hold all vertices in the graph if all vertices are at maximum distance from the start node (like in a star configuration).</li>
+        </ul>
+
+        <p>
+            Just like with DFS, this BFS implementation assumes that the graph is connected. If the graph isn't connected, additional logic might be needed to ensure that all nodes are visited.
+        </p>
 
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>

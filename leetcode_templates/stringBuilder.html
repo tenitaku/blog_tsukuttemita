@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>binary_search</title>
+    <title>String Builder</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
 </head>
@@ -11,11 +11,42 @@
         <li><a href="../leetcode_templates.html">templates</a></li>
     </header>
     <main>
-        <h1>binary_search</h1>
-        
+        <h1>String Builder</h1>
+        <pre><code class = "language-java">
+            public String appendNtimesUsingStringConcat(char c, int n) {
+                String str = "";
+                for (int i = 0; i < n; i++) {
+                    str += c;
+                }
+                return str;
+            }
+            
+            public String appendNtimesUsingStringBuilder(char c, int n) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < n; i++) {
+                    sb.append(c);
+                }
+                return sb.toString();
+            }
+            
+        </code></pre>
+
+        <p>This code is written in Java and demonstrates two methods of appending characters to a string: one using string concatenation and the other using StringBuilder.</p>
+        <p>Let's analyze both these methods in terms of time complexity and space complexity.</p>
+
+        <h2>appendNtimesUsingStringConcat method:</h2>
+        <p>In this method, a character 'c' is being appended to a string 'str' using the "+" operator. In Java, strings are immutable which means a new string is created every time you perform a string operation like concatenation. Thus, every iteration of the loop in this function creates a new string of increasing length.</p>
+        <p>The time complexity of this operation is O(n^2) because each string concatenation takes time proportional to the length of the result. So, appending a single character to a string of length n requires O(n) operations, and doing this n times gives a time complexity of O(n^2).</p>
+        <p>The space complexity of this method is also O(n^2). This is because for each iteration, a new string is created and stored in memory. If we assume that each character takes a constant amount of space, then creating n strings of length from 1 to n will require (n*(n+1))/2 = O(n^2) space in total.</p>
+
+        <h2>appendNtimesUsingStringBuilder method:</h2>
+        <p>In this method, StringBuilder is being used. A StringBuilder object in Java is mutable. This means that it can change its internal state without creating a new object.</p>
+        <p>So, when you append a character to a StringBuilder object, it simply changes its internal state and doesn't need to create a new object like a string would. This means that the append operation on a StringBuilder object is O(1), i.e., it takes a constant amount of time, regardless of the length of the StringBuilder. Therefore, appending 'n' characters will take O(n) time in total, which is significantly more efficient than the previous method.</p>
+        <p>In terms of space complexity, this method is O(n), where 'n' is the number of characters to be appended. This is because a single StringBuilder object is used throughout the entire operation, and this object grows linearly with the number of append operations. Therefore, the amount of space used is proportional to the number of characters appended, which gives a space complexity of O(n).</p>
 
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-java.min.js"></script>
 </body>
 </html>
+

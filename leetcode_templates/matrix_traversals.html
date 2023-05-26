@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>binary_search</title>
+    <title>Matrix Traversals</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
 </head>
@@ -11,8 +11,56 @@
         <li><a href="../leetcode_templates.html">templates</a></li>
     </header>
     <main>
-        <h1>binary_search</h1>
-        
+        <h1>Depth-First Search (DFS) on a 2D grid</h1>
+        <pre><code class = "language-java">
+            void dfs(int[][] grid, int i, int j, boolean[][] visited) {
+                if (i < 0 || j < 0 || i >= grid.length || 
+                    j >= grid[0].length || visited[i][j]) return;
+                visited[i][j] = true;
+                dfs(grid, i + 1, j, visited);
+                dfs(grid, i - 1, j, visited);
+                dfs(grid, i, j + 1, visited);
+                dfs(grid, i, j - 1, visited);
+            }
+        </code></pre>
+
+        <p>The dfs function starts at a point in the grid (the cell at grid[i][j]) and marks this point as visited by setting visited[i][j] to true. It then recursively visits the neighbors of the cell in the North, South, East, and West directions (ignoring diagonals), provided they are within the grid boundaries and have not been visited before. The order of the recursive calls defines the order of the search, which in this case is South, North, East, and West.</p>
+        <p>The base case of the recursion is when the function tries to visit a cell that is out of the grid's boundaries or has been visited before. In such a case, the function simply returns without doing anything.</p>
+        <p>This algorithm is used in many different applications like path finding, finding connected components in a graph, etc.</p>
+        <p>The time complexity of this function is O(n), where n is the total number of cells in the grid (n = grid.length * grid[0].length). This is because each cell in the grid is visited once and only once by the algorithm.</p>
+        <p>The space complexity is also O(n) for the same reasons. We need to keep track of whether we've visited each cell, which requires an extra boolean for each cell. Also, in the worst case scenario, the maximum depth of the recursion call stack will be the number of cells in the grid (for example, in the case where all cells are reachable along a single path). So the overall space complexity is O(n).</p>
+        <p>Please note that in the real world, it might cause a stack overflow error if the grid is too large, because the maximum recursion depth in many environments is much smaller than the number of cells in a large grid.</p>
+        <p>One thing to note is that your current function does not make use of the values in the grid. Depending on your specific use case, you might need to add some code to process or check these values.</p>
+
+        <h1>Breadth-First Search (BFS) algorithm on a 2D grid</h1>
+        <pre><code class = "language-java">
+            int[][] dirs = { {0,1}, {0,-1}, {1,0}, {-1,0} };
+            void bfs(char[][] grid, int _i, int _j) {
+                Deque<int[]> q = new ArrayDeque<>();
+                boolean[][] visited = new boolean[grid.length][grid[0].length];
+                q.addLast(new int[] {_i, _j});
+                visited[_i][_j] = true;
+                while (!q.isEmpty()) {
+                    int[] cur = q.removeFirst();
+                    for (int[] dir : dirs) {
+                        int i = cur[0] + dir[0];
+                        int j = cur[1] + dir[1];
+                        if (i < 0 || j < 0 || i >= grid.length || 
+                            j >= grid[0].length || visited[i][j]) continue;
+                        visited[i][j] = true;
+                        q.addLast(new int[] {i, j});
+                    }
+                }
+            }
+        </code></pre>
+
+        <p>BFS is an algorithm for traversing or searching tree or graph data structures. It starts at the root (or in this case, a selected node of the grid) and explores all the neighbor nodes at the present depth prior to moving on to nodes at the next depth level.</p>
+        <p>In your code, the bfs function uses a queue to implement the BFS algorithm. The function starts at a point in the grid (the cell at grid[_i][_j]) and marks this point as visited by setting visited[_i][_j] to true. It then adds this point to the queue.</p>
+        <p>While there are still points in the queue, it removes the first point in the queue and visits all its unvisited neighbors, adding them to the end of the queue. This way, it visits all points in "layers", starting with the initial point, then all its neighbors, then all their neighbors, and so on.</p>
+        <p>Similar to your previous DFS function, this BFS function explores the North, South, East, and West neighbors of each cell (ignoring diagonals). The check for boundaries and previously visited cells is also similar.</p>
+        <p>The time complexity of this function is O(n), where n is the total number of cells in the grid (n = grid.length * grid[0].length). This is because each cell in the grid is visited once and only once by the algorithm.</p>
+        <p>The space complexity is also O(n) for the same reasons. We need to keep track of whether we've visited each cell, which requires an extra boolean for each cell. In the worst-case scenario, all cells might end up in the queue at the same time (for example, in the case of a large open area), so the space required for the queue is also O(n).</p>
+        <p>Again, this function does not use the values in the grid array. Depending on your use case, you might need to add some code to process or check these values.</p>
 
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
