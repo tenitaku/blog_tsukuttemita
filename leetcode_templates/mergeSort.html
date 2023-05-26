@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>binary_search</title>
+    <title>Merge Sort</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
 </head>
@@ -11,7 +11,54 @@
         <li><a href="../leetcode_templates.html">templates</a></li>
     </header>
     <main>
-        <h1>binary_search</h1>
+        <h1>Merge Sort</h1>
+        <pre><code class = "language-java">
+            void msort(int[] nums) {
+                msort(nums, 0, nums.length - 1);
+            }
+            void msort(int[] nums, int l, int r) {
+                if (l >= r) return;
+            
+                int m = (l + r) / 2;
+                msort(nums, l, m);
+                msort(nums, m + 1, r);
+                merge(nums, l, r);
+            }
+            void merge(int[] nums, int l, int r) {
+                int m = (l + r) / 2, i = l, j = m + 1;
+                int[] arr = new int[r - l + 1];
+                for (int k = 0; k < arr.length; k++) {
+                    if (j > r || (i <= m && nums[i] < nums[j])) arr[k] = nums[i++];
+                    else arr[k] = nums[j++];
+                }
+                for (int k = 0; k < arr.length; k++) {
+                    nums[l++] = arr[k];
+                }
+            }
+        </code></pre>
+
+        <p>
+            This is a Java implementation of the Merge Sort algorithm, a well-known divide-and-conquer algorithm for sorting an array or list of items. Here is a step-by-step explanation:
+        </p>
+
+        <ol>
+            <li>msort(int[] nums): This method is a public interface for users to sort the array. It calls the private msort method with the full range of the array.</li>
+            <li>msort(int[] nums, int l, int r): This is the private method that performs the actual sorting. l and r are the boundaries of the portion of the array that is currently being sorted.
+                <ul>
+                    <li>If l >= r, this indicates that the current portion of the array has one or zero elements and is already sorted, so the method returns.</li>
+                    <li>Otherwise, the method calculates the middle index m, and recursively sorts the two halves of the array.</li>
+                </ul>
+            </li>
+            <li>merge(int[] nums, int l, int r): This method merges two sorted subarrays into a single sorted array. The left subarray is from l to m and the right subarray is from m + 1 to r.
+                <ul>
+                    <li>It creates a new temporary array arr and then it iterates over the two subarrays in order, always choosing the smaller element and putting it into arr.</li>
+                    <li>After that, it copies the sorted elements from arr back into the original array nums.</li>
+                </ul>
+            </li>
+
+            <p>Time complexity: The time complexity of merge sort is O(n log n) in all three cases (worst, average, and best) as merge sort always divides the array into two halves and takes linear time to merge two halves.</p>
+            <p>Space complexity: The space complexity of merge sort is O(n) because an auxiliary array of size n is used in the merge process. The array arr in the merge method is of size r - l + 1, which in the worst case equals n. In addition, there's the space used in the recursion stack, but since merge sort is not a depth-first recursion, the maximum depth of the recursion is log(n), hence, does not impact the overall space complexity.</p>
+        </ol>
         
 
     </main>

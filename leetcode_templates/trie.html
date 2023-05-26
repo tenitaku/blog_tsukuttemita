@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>binary_search</title>
+    <title>Trie</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
 </head>
@@ -11,7 +11,60 @@
         <li><a href="../leetcode_templates.html">templates</a></li>
     </header>
     <main>
-        <h1>binary_search</h1>
+        <h1>Trie</h1>
+        <pre><code class = "language-java">
+            class Trie {
+                private class TrieNode {
+                    public boolean isWord = false
+                    public TrieNode[] nodes = new TrieNode[26];
+                }    
+                TrieNode root = new TrieNode();
+                /** Inserts a word into the trie. */
+                public void insert(String word) {
+                    TrieNode cur = root;
+                    for (int i = 0; i < word.length(); i++) {
+                        char c = word.charAt(i);
+                        int index = c - 'a';
+                        if (cur.nodes[index] == null) cur.nodes[index] = new TrieNode();
+                        cur = cur.nodes[index];
+                    }
+                    cur.isWord = true;
+                }
+                /** Returns if the word is in the trie. */
+                public boolean search(String word) {
+                    TrieNode cur = root;
+                    for (int i = 0; i < word.length(); i++) {
+                        char c = word.charAt(i);
+                        int index = c - 'a';
+                        if (cur.nodes[index] == null) return false;
+                        cur = cur.nodes[index];
+                    }
+                    return cur.isWord;
+                }
+                /** Returns if there is any word in the trie 
+                    that starts with the given prefix. */
+                public boolean startsWith(String prefix) {
+                    TrieNode cur = root;
+                    for (int i = 0; i < prefix.length(); i++) {
+                        char c = prefix.charAt(i);
+                        int index = c - 'a';
+                        if (cur.nodes[index] == null) return false;
+                        cur = cur.nodes[index];
+                    }
+                    return true;
+                }
+            }
+        </code></pre>
+
+        <p>This Java code defines a Trie data structure, which is a type of search tree that is used to store a dynamic set or associative array where the keys are usually strings. In this code, the Trie is being used to store words where each character of a word is a node in the Trie.</p>
+        <p>Let's go over the code:</p>
+        <ol>
+            <li>TrieNode class: This is an inner class that represents a node in the Trie. Each node can point to other nodes that represent the next character in a word. isWord is a flag to represent the end of a word. nodes is an array of pointers to next possible characters.</li>
+            <li>insert(String word): This function is used to insert a word into the Trie. It iteratively goes through each character of the word and checks if a node already exists in the Trie for that character, if not it creates a new node. Once it has gone through all the characters it sets isWord flag on the last node to mark the end of a word. The time complexity is O(m), where m is the length of the word. The space complexity is also O(m), in the worst-case scenario.</li>
+            <li>search(String word): This function is used to check if a word is present in the Trie. It works in a similar way to the insert function but instead of inserting a node it checks if a node exists for each character in the word. If it reaches the end of the word and the isWord flag is true, it returns true, else it returns false. The time complexity is O(m), where m is the length of the word.</li>
+            <li>startsWith(String prefix): This function checks if there is any word in the Trie that starts with a given prefix. It works in a similar way to the search function but does not check the isWord flag. If it can traverse the Trie for all the characters in the prefix, it returns true, else it returns false. The time complexity is O(p), where p is the length of the prefix.</li>
+        </ol>
+        <p>The Trie data structure provides an efficient way to insert and search for words, particularly when dealing with prefixes. However, it does have a larger space requirement compared to other data structures like hash maps, because each node in the Trie could potentially store a pointer to several other nodes. The space complexity of the entire Trie is O(n), where n is the total number of characters in all words.</p>
         
 
     </main>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>binary_search</title>
+    <title>Deque</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
 </head>
@@ -11,9 +11,67 @@
         <li><a href="../leetcode_templates.html">templates</a></li>
     </header>
     <main>
-        <h1>binary_search</h1>
-        
+        <p>The code you've provided demonstrates the use of Deque (Double Ended Queue) as a Stack, Queue, and LinkedList. Deque is a data structure that allows addition or removal of elements from both ends.</p>
+        <p>
+            Let's discuss each operation:
+        </p>
+        <h1>Stack</h1>
+        <pre><code class = "language-java">
+            // Stack
+            Deque<Integer> s = new ArrayDeque<>();
+            s.addLast(1);       // 1
+            s.addLast(2);       // 1,2
+            s.addLast(3);       // 1,2,3
+            s.removeLast();     // 1,2
+            s.removeLast();     // 1
+        </code></pre>
 
+        <p>Stacks follow LIFO (Last In First Out) principle. Here's what each operation does:</p>
+        <ul>
+            <li>addLast(): Adds an element at the end of the deque. This operation has a time complexity of O(1) as it directly adds the element at the end.</li>
+            <li>removeLast(): Removes an element from the end of the deque, simulating the pop operation in a stack. This operation also has a time complexity of O(1), as it directly removes the element from the end.</li>
+        </ul>
+
+        <h1>Queue</h1>
+        <pre><code class = "language-java">
+            // Queue
+            Deque<Integer> q = new ArrayDeque<>();
+            q.addLast(1);       // 1
+            q.addLast(2);       // 1,2
+            q.addLast(3);       // 1,2,3
+            q.removeFirst();    // 2,3
+            q.removeFirst();    // 3
+        </code></pre>
+
+        <p>Queues follow FIFO (First In First Out) principle. The operations are:</p>
+
+        <ul>
+            <li>addLast(): Adds an element at the end of the deque. This is equivalent to the enqueue operation in a queue. The time complexity is O(1).</li>
+            <li>removeFirst(): Removes an element from the start of the deque, simulating the dequeue operation in a queue. The time complexity is O(1) as it directly removes the element from the start.</li>
+        </ul>
+
+        <h1>Linkedlist</h1>
+        <pre><code class = "language-java">
+            // LinkedList
+            Deque<Integer> ll = new ArrayDeque<>();
+            ll.addLast(1);      // 1
+            ll.addLast(2);      // 1,2
+            ll.addFirst(0);     // 0,1,2
+            ll.removeLast();    // 0,1
+            ll.removeFirst();   // 1
+        </code></pre>
+
+        <p>LinkedList is a linear data structure where each element points to the next one in the sequence. The operations are:</p>
+
+        <ul>
+            <li>addLast(): Adds an element at the end of the deque. The time complexity is O(1).</li>
+            <li>addFirst(): Adds an element at the start of the deque. The time complexity is O(1) as it directly adds the element at the start.</li>
+            <li>removeLast(): Removes an element from the end of the deque. The time complexity is O(1).</li>
+            <li>removeFirst(): Removes an element from the start of the deque. The time complexity is O(1).</li>
+        </ul>
+
+        <p>In terms of space complexity, all these operations take O(n) space, where n is the number of elements stored in the deque. This is because each element requires its own space in the memory. The deque internally manages these elements, but the overall space required grows linearly with the number of elements.</p>
+        <p>Java's ArrayDeque is implemented as a resizable-array, which is a variant of an array. It is more memory efficient than a LinkedList, especially when used as a stack or queue, because it uses less memory per element. Also, ArrayDeque operations are typically faster than LinkedList operations due to better locality of reference (elements are stored contiguously in memory).</p>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-java.min.js"></script>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>binary_search</title>
+    <title>Quick Select</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
 </head>
@@ -11,7 +11,55 @@
         <li><a href="../leetcode_templates.html">templates</a></li>
     </header>
     <main>
-        <h1>binary_search</h1>
+        <h1>Quick Select</h1>
+
+        <pre><code class = "language-java">
+            public int findKthLargest(int[] nums, int k) {
+                return quickSelect(nums, 0, nums.length - 1, nums.length - k);
+            }
+            private int quickSelect(int[] nums, int l, int r, int k) {
+                int p = partition(nums, l, r);
+                if (p < k) return quickSelect(nums, p + 1, r, k);
+                if (p > k) return quickSelect(nums, l, p - 1, k);
+                return nums[p];
+            }
+            private int partition(int[] nums, int l, int r) {
+                int pivot = nums[r];
+                int p = r;
+                for (int i = l; i < p; i++) {
+                    if (nums[i] > pivot) {
+                        swap(nums, i, p - 1);
+                        swap(nums, p, p - 1);
+                        i--;
+                        p--;
+                    }
+                }
+                return p;
+            }
+            private void swap(int[] nums, int a, int b) {
+                int tmp = nums[a];
+                nums[a] = nums[b];
+                nums[b] = tmp;
+            }
+        </code></pre>
+
+        <p>This code is implementing a function to find the Kth largest element in an unsorted array using a method called QuickSelect, which is an optimized variant of QuickSort. QuickSelect is a Divide and Conquer algorithm used for solving the Kth smallest or largest element in an array. Here's a breakdown:</p>
+
+        <ol>
+            <li>findKthLargest: This is the main function which is used to find the Kth largest element. It simply calls the quickSelect function with the given array and the index of Kth largest number (nums.length - k).</li>
+            <li>quickSelect: This is a recursive function that partitions the array around a pivot and then recursively calls itself based on the position of the partition in relation to K. If the partition index is less than K, it means the Kth largest element is in the right part of the array, so it recurses on that. If the partition index is greater than K, it means the Kth largest element is in the left part of the array, so it recurses on that. If the partition index equals K, it means we've found the Kth largest number, and it returns that number.</li>
+            <li>partition: This function takes the rightmost element as a pivot, places the pivot element at its correct position in the sorted array, and places all smaller (smaller than pivot) to the left of pivot and all greater elements to the right of the pivot.</li>
+            <li>swap: This function swaps two elements in the array.</li>
+        </ol>
+
+        <p>In terms of time complexity:</p>
+        <p>The QuickSelect algorithm has an average time complexity of O(n), because each recursive call processes a part of the array that's one element smaller, leading to a linear number of operations in the average case.</p>
+        <p>However, in the worst-case scenario (when the array is already sorted), QuickSelect has a time complexity of O(n^2). This happens because every partition would always pick the greatest or smallest element, so each recursive call would only reduce the array size by one.</p>
+        <p>In terms of space complexity:</p>
+        <p>The space complexity of this implementation is O(1) because it uses a constant amount of space to store variables. The space complexity doesn't scale with the size of the input array. However, this does not account for the stack space used by recursion. In the worst case, the recursion depth could go up to n, leading to O(n) space complexity.</p>
+        <p>But on average, the recursion would go up to log(n) depth, leading to an average space complexity of O(log(n)). This is under the assumption that QuickSelect on average reduces the problem size by about half at each recursive step, which leads to log(n) depth.</p>
+        <p>Note: It's worth mentioning that in practice, QuickSelect is usually faster than sorting algorithms for finding the Kth largest element, especially when n is large and/or k is small.</p>
+
         
 
     </main>

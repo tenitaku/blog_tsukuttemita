@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>binary_search</title>
+    <title>Quick Sort</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
 </head>
@@ -11,8 +11,54 @@
         <li><a href="../leetcode_templates.html">templates</a></li>
     </header>
     <main>
-        <h1>binary_search</h1>
-        
+        <h1>Quick Sort</h1>
+
+        <pre><code class = "language-java">
+            void qsort(int[] nums) {
+                qsort(nums, 0, nums.length - 1);
+            }
+            void qsort(int[] nums, int l, int r) {
+                if (l >= r) return;
+                int p = partition(nums, l, r);
+                qsort(nums, l, p - 1);
+                qsort(nums, p + 1, r);
+            }
+            int partition(int[] nums, int l, int r) {
+                int pivot = nums[r];
+                int p = r;
+                for (int i = l; i < p; i++) {
+                    if (nums[i] >= pivot) {
+                        swap(nums, i, p - 1);
+                        swap(nums, p, p - 1);
+                        i--;
+                        p--;
+                    }
+                }
+                return p;
+            }
+            void swap(int[] nums, int a, int b) {
+                int tmp = nums[a];
+                nums[a] = nums[b];
+                nums[b] = tmp;
+            }
+        </code></pre>
+        <p>This code is implementing the Quicksort algorithm. The Quicksort algorithm is a popular sorting algorithm that is efficient for large lists. It is a divide and conquer algorithm that works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot. The sub-arrays are then recursively sorted.</p>
+        <p>Here's how the functions work:</p>
+
+        <ul>
+            <li>The qsort(int[] nums) method is a convenience method that initiates the Quicksort algorithm. It calls the qsort(int[] nums, int l, int r) method using the full range of the input array.</li>
+            <li>The qsort(int[] nums, int l, int r) method is the main recursive function of the Quicksort algorithm. It partitions the array and then recursively calls itself on the two sub-arrays.</li>
+            <li>The partition(int[] nums, int l, int r) method chooses a pivot (in this case, the element at the end of the segment of the array being worked on), then rearranges the elements in the segment such that all elements smaller than the pivot come before all elements larger than the pivot.</li>
+            <li>The swap(int[] nums, int a, int b) method swaps the elements at positions a and b in the nums array.</li>
+        </ul>
+
+        <p>Time complexity:</p>
+        <p>The worst-case time complexity of Quicksort is O(n^2). This worst-case scenario happens when the smallest or largest element is always chosen as the pivot. This leads to not very balanced partitions.</p>
+        <p>The best-case and average time complexity is O(n log n), and it happens when the partition process always picks the middle element as the pivot (or, in general terms, when it manages to split the array into two roughly equal pieces).</p>
+        <p>Space complexity:</p>
+        <p>The space complexity for Quicksort is O(log n). This is because the maximum depth of the recursion tree is log n. Each recursive call needs a constant amount of space.</p>
+        <p>One more thing to note is that this is an in-place sorting algorithm, meaning it does not require any extra storage (excluding the stack space for recursion), and it rearranges numbers within the array itself.</p>
+        <p>Lastly, this particular implementation of Quicksort uses a variation called Lomuto partition scheme. It is simpler but performs more swaps compared to the Hoare partition scheme, which is generally more efficient.</p>
 
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
