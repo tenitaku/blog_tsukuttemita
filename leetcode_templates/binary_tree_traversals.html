@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>binary_search</title>
+    <title>binary_tree_traversals</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
 </head>
@@ -11,9 +11,77 @@
         <li><a href="../leetcode_templates.html">templates</a></li>
     </header>
     <main>
-        <h1>binary_search</h1>
-        
+        <h1>Depth-First Search (DFS) in tree structures</h1>
+        <h2>Preorder Traversal</h2>
+        <pre><code class="language-java">
+            void preorder(TreeNode root) {
+                if (root == null) return;
+                System.out.print(root.val + " ");
+                preorder(root.left);
+                preorder(root.right);
+            }
+        </code></pre>
+        <p>In this traversal, each node is visited in the following order: root, left child, right child. That is, it first processes the root, then recursively processes the left child, and finally recursively processes the right child.</p>
+        <p>Time Complexity: The time complexity of this algorithm is O(n). This is because each node in the tree is visited exactly once.</p>
+        <p>Space Complexity: The space complexity of this algorithm is O(h), where h is the height of the tree. This corresponds to the usage of the stack determined by the depth of recursion.</p>
+        <h2>Inorder Traversal</h2>
+        <pre><code class="language-java">
+            void inorder(TreeNode root) {
+                if (root == null) return;
+                inorder(root.left);
+                System.out.print(root.val + " ");
+                inorder(root.right);
+            }
+        </code></pre>
+        <p>In this traversal, each node is visited in the following order: left child, root, right child. That is, it first recursively processes the left child, then processes the root, and finally recursively processes the right child.</p>
+        <p>Time Complexity: The time complexity of this algorithm is also O(n). This is because, similarly, each node in the tree is visited exactly once.</p>
+        <p>Space Complexity: The space complexity of this algorithm is also O(h), where h is the height of the tree. This corresponds to the usage of the stack determined by the depth of recursion.</p>
+        <h2>Postorder Traversal</h2>
+        <pre><code class="language-java">
+            void postorder(TreeNode root) {
+                if (root == null) return;
+                postorder(root.left);
+                postorder(root.right);
+                System.out.print(root.val + " ");
+            }
+        </code></pre>
+        <p>In this traversal, each node is visited in the following order: left child, right child, root. That is, it first recursively processes the left child, then recursively processes the right child, and finally processes the root.</p>
+        <p>Time Complexity: The time complexity of this algorithm is also O(n). This is because each node in the tree is visited exactly once.</p>
+        <p>Space Complexity: The space complexity of this algorithm is also O(h), where h is the height of the tree. This corresponds to the usage of the stack determined by the depth of recursion.</p>
+        <p>Overall, these depth-first search algorithms have a time complexity of O(n) and a space complexity of O(h). However, the order in which each algorithm visits nodes is different, resulting in different traversal results.</p>
 
+        <h1>breadth-first search (BFS) on the tree</h1>
+        <pre><code class="language-java">
+            void levelorder(TreeNode root) {
+                if (root == null) return;
+                Deque<TreeNode> q = new ArrayDeque<>();
+                q.addLast(root);
+                while (q.isEmpty() == false) {
+                    int size = q.size();
+                    for (int i = 0; i < size; i++) {
+                        TreeNode node = q.removeFirst();
+                        System.out.println(node.val + " ");
+                        if (node.left != null) q.addLast(node.left);
+                        if (node.right != null) q.addLast(node.right);
+                    }
+                    System.out.println();
+                }
+            }
+        </code></pre>
+        <p>This function performs a breadth-first search (BFS) on the tree, also known as level order traversal. In this traversal, nodes are visited level by level from top to bottom, and from left to right within each level. This is different from depth-first search, which follows a path as far down as possible before backtracking.</p>
+        <p>Here is how the code works:</p>
+        <ol>
+            <li>First, it checks if the root is null. If so, it returns immediately, as there is no tree to traverse.</li>
+            <li>If the root is not null, it creates a queue and adds the root to it.</li>
+            <li>Then, it enters a loop that continues until the queue is empty.</li>
+            <li>At each iteration of the loop, it records the current size of the queue. This size is the number of nodes in the current level of the tree.</li>
+            <li>It then enters a loop that iterates size times, removing the front node from the queue, printing its value, and adding its left and right children to the back of the queue (if they exist).</li>
+            <li>The outer loop then starts again, processing the next level of the tree.</li>
+        </ol>
+        <p>Time Complexity:</p>
+        <p>The time complexity is O(n), where n is the number of nodes in the tree. This is because every node is visited and processed exactly once.</p>
+        <p>Space Complexity:</p>
+        <p>The space complexity is O(m), where m is the maximum number of nodes in any single level of the tree. This is because the largest number of nodes the queue needs to hold at once is the width of the tree, which is the size of the largest level. This occurs when all nodes are in the queue at the same time, which happens when the algorithm is processing the level that contains the most nodes.</p>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-java.min.js"></script>
